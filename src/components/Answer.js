@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 
 export default function Answer(props) {
-  const isCorrect = props.answered === props.answer && props.answeredCorrect;
+  const isCorrect = props.answered && props.correctAnswer === props.answer;
   const isWrong =
     !props.answeredCorrect && props.answered && props.answered === props.answer;
 

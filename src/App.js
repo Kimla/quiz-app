@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       question: null,
       answers: [],
-      right_answer: null,
+      correctAnswer: null,
       answered: null,
       answeredCorrect: null
     };
@@ -21,7 +21,7 @@ class App extends Component {
     this.setState({
       question: null,
       answers: [],
-      right_answer: null,
+      correctAnswer: null,
       answered: null,
       answeredCorrect: null
     });
@@ -36,7 +36,7 @@ class App extends Component {
     this.setState({
       question: item.question,
       answers: shuffle([...item.incorrect_answers, item.correct_answer]),
-      right_answer: item.correct_answer
+      correctAnswer: item.correct_answer
     });
   }
 
@@ -49,12 +49,18 @@ class App extends Component {
 
     this.setState({
       answered: answer,
-      answeredCorrect: answer === this.state.right_answer
+      answeredCorrect: answer === this.state.correctAnswer
     });
   }
 
   render() {
-    const { question, answers, answered, answeredCorrect } = this.state;
+    const {
+      question,
+      answers,
+      answered,
+      answeredCorrect,
+      correctAnswer
+    } = this.state;
 
     return (
       <div className="app">
@@ -66,6 +72,7 @@ class App extends Component {
               answer={answer}
               answered={answered}
               answeredCorrect={answeredCorrect}
+              correctAnswer={correctAnswer}
               onClick={() => this.answerQuestion(answer)}
             />
           ))}
