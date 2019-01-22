@@ -40,7 +40,17 @@ class App extends Component {
   }
 
   async setQuestion() {
-    const res = await axios.get("https://opentdb.com/api.php?amount=1");
+    let url = "https://opentdb.com/api.php?amount=1&difficulty=";
+
+    if (this.state.points < 10) {
+      url += "easy";
+    } else if (this.state.points < 20) {
+      url += "medium";
+    } else {
+      url += "hard";
+    }
+
+    const res = await axios.get(url);
     const [item] = res.data.results;
 
     this.setState({
