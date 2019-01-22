@@ -1,15 +1,15 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 
-const Clock = props => {
-  const clock = css`
+const Points = props => {
+  const points = css`
     text-align: center;
     margin-bottom: 30px;
     font-size: 20px;
     font-weight: 500;
   `;
 
-  return <div css={clock}>{props.time}</div>;
+  return <div css={points}>Points: {props.points}</div>;
 };
 
-export default Clock;
+export default Points;

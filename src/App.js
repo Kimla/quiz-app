@@ -4,6 +4,7 @@ import Question from "./components/Question";
 import Answer from "./components/Answer";
 import NextButton from "./components/NextButton";
 import Clock from "./components/Clock";
+import Points from "./components/Points";
 const shuffle = require("lodash/shuffle");
 
 class App extends Component {
@@ -15,21 +16,26 @@ class App extends Component {
       correctAnswer: null,
       answered: null,
       answeredCorrect: null,
-      timer: 30
+      timer: 30,
+      points: 0
     };
   }
 
   nextQuestion() {
-    this.setState({
-      question: null,
-      answers: [],
-      correctAnswer: null,
-      answered: null,
-      answeredCorrect: null,
-      timer: 30
+    clearInterval(this.timer);
+
+    this.setState(state => {
+      return {
+        question: null,
+        answers: [],
+        correctAnswer: null,
+        answered: null,
+        answeredCorrect: null,
+        timer: 30,
+        points: state.answeredCorrect ? state.points : 0
+      };
     });
 
-    clearInterval(this.timer);
     this.setQuestion();
   }
 
@@ -70,9 +76,12 @@ class App extends Component {
   answerQuestion(answer) {
     if (this.state.answered) return;
 
-    this.setState({
-      answered: answer,
-      answeredCorrect: answer === this.state.correctAnswer
+    this.setState(state => {
+      return {
+        answered: answer,
+        answeredCorrect: answer === state.correctAnswer,
+        points: answer === state.correctAnswer ? state.points + 1 : state.points
+      };
     });
   }
 
@@ -83,7 +92,8 @@ class App extends Component {
       answered,
       answeredCorrect,
       correctAnswer,
-      timer
+      timer,
+      points
     } = this.state;
 
     return (
@@ -100,8 +110,14 @@ class App extends Component {
               onClick={() => this.answerQuestion(answer)}
             />
           ))}
-          {answered && <NextButton onClick={() => this.nextQuestion()} />}
+          {answered && (
+            <NextButton
+              answeredCorrect={answeredCorrect}
+              onClick={() => this.nextQuestion()}
+            />
+          )}
           {!answered && <Clock time={timer} />}
+          <Points points={points} />
         </div>
       </div>
     );

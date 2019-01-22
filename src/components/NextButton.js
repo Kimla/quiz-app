@@ -8,12 +8,13 @@ export default function NextButton(props) {
     padding: 12px 30px;
     display: block;
     margin: 0 auto;
+    margin-bottom: 30px;
     min-width: 120px;
   `;
 
   return (
     <button css={button} onClick={props.onClick}>
-      Next!
+      {props.answeredCorrect ? "Next!" : "Restart"}
     </button>
   );
 }
