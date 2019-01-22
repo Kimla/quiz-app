@@ -3,6 +3,7 @@ import axios from "axios";
 import Question from "./components/Question";
 import Answer from "./components/Answer";
 import NextButton from "./components/NextButton";
+import Clock from "./components/Clock";
 const shuffle = require("lodash/shuffle");
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
       answers: [],
       correctAnswer: null,
       answered: null,
-      answeredCorrect: null
+      answeredCorrect: null,
+      timer: 30
     };
   }
 
@@ -23,9 +25,11 @@ class App extends Component {
       answers: [],
       correctAnswer: null,
       answered: null,
-      answeredCorrect: null
+      answeredCorrect: null,
+      timer: 30
     });
 
+    clearInterval(this.timer);
     this.setQuestion();
   }
 
@@ -38,10 +42,29 @@ class App extends Component {
       answers: shuffle([...item.incorrect_answers, item.correct_answer]),
       correctAnswer: item.correct_answer
     });
+
+    this.startTimer();
   }
 
   componentDidMount() {
     this.setQuestion();
+  }
+
+  startTimer() {
+    this.timer = setInterval(() => {
+      if (this.state.timer > 0) {
+        this.setState(state => {
+          return { timer: state.timer - 1 };
+        });
+      } else {
+        this.setState(state => {
+          return {
+            answered: state.correctAnswer,
+            answeredCorrect: false
+          };
+        });
+      }
+    }, 1000);
   }
 
   answerQuestion(answer) {
@@ -59,7 +82,8 @@ class App extends Component {
       answers,
       answered,
       answeredCorrect,
-      correctAnswer
+      correctAnswer,
+      timer
     } = this.state;
 
     return (
@@ -77,6 +101,7 @@ class App extends Component {
             />
           ))}
           {answered && <NextButton onClick={() => this.nextQuestion()} />}
+          {!answered && <Clock time={timer} />}
         </div>
       </div>
     );
