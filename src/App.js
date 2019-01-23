@@ -110,16 +110,18 @@ class App extends Component {
       <div className="app">
         <div className="container">
           <Question question={question} />
-          {answers.map(answer => (
-            <Answer
-              key={answer}
-              answer={answer}
-              answered={answered}
-              answeredCorrect={answeredCorrect}
-              correctAnswer={correctAnswer}
-              onClick={() => this.answerQuestion(answer)}
-            />
-          ))}
+          <div className="answers">
+            {answers.map(answer => (
+              <Answer
+                key={answer}
+                answer={answer}
+                answered={answered}
+                answeredCorrect={answeredCorrect}
+                correctAnswer={correctAnswer}
+                onClick={() => this.answerQuestion(answer)}
+              />
+            ))}
+          </div>
           {answered && (
             <NextButton
               answeredCorrect={answeredCorrect}
