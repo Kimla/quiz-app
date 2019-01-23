@@ -5,6 +5,7 @@ import Answer from "./components/Answer";
 import NextButton from "./components/NextButton";
 import Clock from "./components/Clock";
 import Points from "./components/Points";
+import Header from "./components/Header";
 const shuffle = require("lodash/shuffle");
 
 class App extends Component {
@@ -116,6 +117,7 @@ class App extends Component {
 
     return (
       <div className="app">
+        <Header />
         <div className="container">
           <Question question={question} />
           <div className="answers">
