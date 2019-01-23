@@ -53,9 +53,17 @@ class App extends Component {
     const res = await axios.get(url);
     const [item] = res.data.results;
 
+    let answers = [];
+
+    if (item.type === "boolean") {
+      answers = ["False", "True"];
+    } else {
+      answers = shuffle([...item.incorrect_answers, item.correct_answer]);
+    }
+
     this.setState({
       question: item.question,
-      answers: shuffle([...item.incorrect_answers, item.correct_answer]),
+      answers: answers,
       correctAnswer: item.correct_answer
     });
 
