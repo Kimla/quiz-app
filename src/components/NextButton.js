@@ -10,6 +10,8 @@ export default function NextButton(props) {
     margin: 0 auto;
     margin-bottom: 30px;
     min-width: 120px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(50, 50, 93, 0.1);
   `;
 
   return (

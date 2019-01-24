@@ -8,8 +8,7 @@ export default function Answer(props) {
 
   const answer = css`
     text-align: center;
-    padding: 12px 10px;
-    border: 1px solid #ddd;
+    padding: 14px 10px;
     background-color: #fff;
     background-color: ${isCorrect ? "#4CAF50" : ""};
     background-color: ${isWrong ? "#F44336" : ""};
@@ -22,6 +21,8 @@ export default function Answer(props) {
     line-height: 1.4;
     font-size: 14px;
     font-weight: 500;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(50, 50, 93, 0.1);
   `;
 
   return (
