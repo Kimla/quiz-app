@@ -6,7 +6,6 @@ const Clock = props => {
     text-align: center;
     font-size: 20px;
     font-weight: 500;
-    padding-bottom: 4px;
     background-color: #2196f3;
     color: #fff;
     border-radius: 100%;
