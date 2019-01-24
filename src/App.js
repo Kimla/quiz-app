@@ -118,29 +118,31 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
-        <div className="container">
-          <Question question={question} />
-          <div className="answers">
-            {answers.map(answer => (
-              <Answer
-                key={answer}
-                answer={answer}
-                answered={answered}
+        <main className="appInner">
+          <div className="quizContainer container">
+            <Question question={question} />
+            <div className="answers">
+              {answers.map(answer => (
+                <Answer
+                  key={answer}
+                  answer={answer}
+                  answered={answered}
+                  answeredCorrect={answeredCorrect}
+                  correctAnswer={correctAnswer}
+                  onClick={() => this.answerQuestion(answer)}
+                />
+              ))}
+            </div>
+            {answered && (
+              <NextButton
                 answeredCorrect={answeredCorrect}
-                correctAnswer={correctAnswer}
-                onClick={() => this.answerQuestion(answer)}
+                onClick={() => this.nextQuestion()}
               />
-            ))}
+            )}
+            {!answered && <Clock time={timer} />}
           </div>
-          {answered && (
-            <NextButton
-              answeredCorrect={answeredCorrect}
-              onClick={() => this.nextQuestion()}
-            />
-          )}
-          {!answered && <Clock time={timer} />}
           <Points points={points} />
-        </div>
+        </main>
       </div>
     );
   }
